@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .row{
+            max-width: 600px;
+            margin: auto;
+            margin-top: 100px;
+            display: flex;
+            gap: 25px;
+        }
+        .image{
+            flex-basis: 50%;
+        }
+        .image img {
+            width: 100%;
+            height: 100%;
+        }
+        .output{
+            margin: auto;
+            text-align: center;
+        }
+        .output img{
+            width: 300px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- <div class="row">
+        <div class="image" onmouseover="imageChanger()" onmouseout="imageChanger()">
+            <img src="images/1.png" id="image1"/>
+        </div>
+        <div class="image" onmouseenter="imageChanger()" onmouseleave="imageChanger()">
+            <img src="images/3.png" id="image2"/>
+        </div>
+    </div>
+
+    <script>
+        function imageChanger(){
+            image1 = document.getElementById('image1').src;
+            image2 = document.getElementById('image2').src;
+
+            document.getElementById('image1').src = image2;
+            document.getElementById('image2').src = image1;
+
+            console.log(image1);
+        }
+
+    </script> -->
+
+    <div class="output">
+        <img src="" id="output"/>
+    </div>
+    <div class="row">
+        <div class="image">
+            <img src="images/1.png" class="images"/>
+        </div>
+        <div class="image">
+            <img src="images/3.png" class="images"/>
+        </div>
+    </div>
+
+    <script>
+        function imageChanger(image){
+            document.getElementById('output').src = image.src;
+            console.log(image.src);
+        }
+
+        // function getValue(){
+        //     console.log('Welcome');
+        // }
+
+
+        // var getValue = () => {
+        //     console.log('Welcome');
+        // }
+
+        // document.getElementById('image1').addEventListener('click', getValue);
+
+
+        // document.getElementById('image1').addEventListener('mouseover', (e) => {
+        //     document.getElementById('output').src = e.target.src;
+        // });
+
+        var allImages = document.querySelectorAll('.images');
+
+
+        console.log(allImages);
+
+    </script>
+</body>
+</html>

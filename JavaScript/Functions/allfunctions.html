@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="sum()" >Sum of Elements</button>
+    <button onclick="average()" >Average</button>
+
+
+    <script>
+
+        var numbers = [10,20,30,40,50];
+
+        function sum(){
+            sum = 0;
+            
+            for(var data of numbers){
+                sum += data;
+            }
+
+            console.log(sum);
+
+        }
+
+        function average(){
+            sum = 0;
+            
+            for(var data of numbers){
+                sum += data;
+            }
+
+            console.log(sum/numbers.length);
+
+        }
+    </script>
+</body>
+</html>

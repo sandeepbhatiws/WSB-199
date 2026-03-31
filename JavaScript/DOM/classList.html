@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        .outer{
+            max-width: 1000px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .buttons{
+            margin-bottom: 20px;
+        }
+        .buttons button{
+            background-color: black;
+            color: white;
+            border: 0px;
+            border-radius: 15px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .row{
+            border: 1px solid gray;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .content{
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="outer">
+        <div class="buttons">
+            <button onclick="cssProperty()">Css Property</button>
+            <button onclick="addClass()">Add Class</button>
+            <button onclick="removeClass()">Remove Class</button>
+            <button onclick="toggleClass()">Toggle Class</button>
+        </div>
+
+
+        <div class="row" id="row">
+            1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam exercitationem totam sequi, quaerat, esse, ab nisi fugit possimus nihil vero ipsa doloremque rerum voluptatibus culpa. Culpa enim odio impedit blanditiis?
+        </div>
+    </div>
+
+    <script>
+        function cssProperty(){
+            document.getElementById('row').style.backgroundColor = 'black';
+            document.getElementById('row').style.color = 'white';
+        }
+
+        function addClass(){
+            document.getElementById('row').classList.add('content');
+        }
+
+
+        function removeClass(){
+            document.getElementById('row').classList.remove('content');
+        }
+
+        function toggleClass(){
+            document.getElementById('row').classList.toggle('content');
+        }
+    </script>
+</body>
+</html>

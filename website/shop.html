@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — Gooey Store</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <nav class="site-nav">
+      <div class="site-brand">
+        <div class="logo">G</div>
+        <div>
+          <div style="font-weight:700;color:#fff">Gooey Store</div>
+          <div style="font-size:12px;opacity:0.85">Demo storefront</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="index.html" class="btn secondary">Home</a>
+        <button id="cartBtn" class="cart-indicator">Cart <span id="cartCount">0</span></button>
+      </div>
+    </nav>
+
+    <section class="hero" style="margin-bottom:20px">
+      <div class="left">
+        <h1>Our Collection</h1>
+        <p>Playful, colorful designs — preview items with a quick view and add to your cart.</p>
+      </div>
+      <div style="width:38%">
+        <img src="https://picsum.photos/seed/hero/800/520" style="width:100%;border-radius:10px;object-fit:cover" alt="hero">
+      </div>
+    </section>
+
+    <section class="products" id="products"></section>
+  </main>
+
+  <div id="cartDrawer" class="cart-drawer hidden" aria-hidden="true">
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <div class="drawer-total">Total: $<span id="cartTotal">0.00</span></div>
+    <div style="margin-top:10px;display:flex;gap:8px">
+      <a href="checkout.html" class="btn">Checkout</a>
+      <button id="clearCart" class="btn secondary">Clear</button>
+    </div>
+  </div>
+
+  <div id="modalRoot"></div>
+
+  <script src="shop.js"></script>
+</body>
+</html>

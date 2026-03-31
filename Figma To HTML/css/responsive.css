@@ -1,0 +1,161 @@
+@media only screen and (min-width:769px) and (max-width:1024px) {
+	.main{
+		padding: 0px 15px;
+		box-sizing: border-box;
+	}
+	.career_content h1{
+		font-size: 45px;
+	}
+	.book_demo {
+		font-size: 16px;
+		padding: 16px 24px;
+	}
+	.curriculam{
+		font-size: 16px;
+	}
+}
+
+@media only screen and (min-width:427px) and (max-width:768px) {
+	.main{
+		padding: 0px 15px;
+	}
+	.inner_career{
+		flex-direction: column;
+		gap: 15px;
+	}
+	.career_content h1{
+		font-size: 45px;
+	}
+	.book_demo {
+		font-size: 16px;
+		padding: 16px 24px;
+	}
+	.curriculam{
+		font-size: 16px;
+	}
+}
+
+@media only screen and (min-width:377px) and (max-width:426px) {
+	.main{
+		padding: 0px 15px;
+	}
+	.inner_career{
+		flex-direction: column;
+		gap: 15px;
+	}
+	.career_content h1{
+		font-size: 36px;
+		line-height: 50px;
+		margin-top: 15px;
+	}
+	.book_demo {
+		font-size: 16px;
+		padding: 16px 24px;
+	}
+	.curriculam{
+		font-size: 16px;
+	}
+	.header{
+		flex-direction: column;
+		align-items: center;
+	}
+	.career_content p{
+		font-size: 18px;
+	}
+	.content{
+		font-size: 16px;
+	}
+	.career_buttons{
+		flex-direction: column;
+	}
+	.download_curriculam{
+		justify-content: center;
+	}
+}
+
+@media only screen and (min-width:321px) and (max-width:376px) {
+	.main{
+		padding: 0px 15px;
+	}
+	.inner_career{
+		flex-direction: column;
+		gap: 15px;
+	}
+	.career_content h1{
+		font-size: 36px;
+		line-height: 50px;
+		margin-top: 15px;
+	}
+	.book_demo {
+		font-size: 16px;
+		padding: 16px 24px;
+	}
+	.curriculam{
+		font-size: 16px;
+	}
+	.header{
+		flex-direction: column;
+		align-items: center;
+	}
+	.career_content p{
+		font-size: 18px;
+	}
+	.content{
+		font-size: 16px;
+	}
+	.career_buttons{
+		flex-direction: column;
+	}
+	.download_curriculam{
+		justify-content: center;
+	}
+}
+
+@media only screen and (min-width:0px) and (max-width:320px) {
+	.main{
+		padding: 0px 15px;
+	}
+	.inner_career{
+		flex-direction: column;
+		gap: 15px;
+	}
+	.career_content h1{
+		font-size: 26px;
+		line-height: 40px;
+		margin-top: 15px;
+	}
+	.book_demo {
+		font-size: 16px;
+		padding: 12px 24px;
+	}
+	.download_curriculam{
+		padding: 12px 24px;
+	}
+	.outer_header_right{
+		padding: 5px 10px;
+	}
+	.call_us{
+		padding: 5px 10px;
+	}
+	.curriculam{
+		font-size: 16px;
+	}
+	.header{
+		flex-direction: column;
+		align-items: center;
+	}
+	.career_content p{
+		font-size: 18px;
+		line-height: 26px;
+	}
+	.content{
+		font-size: 16px;
+		padding-bottom: 10px;
+	}
+	.career_buttons{
+		flex-direction: column;
+	}
+	.download_curriculam{
+		justify-content: center;
+	}
+}

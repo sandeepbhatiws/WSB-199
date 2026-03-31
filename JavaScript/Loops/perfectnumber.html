@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Number</title>
+</head>
+<body>
+    
+
+    <script>
+
+        // var number = prompt('Enter the number');
+        // var status = 1;
+
+        // for(var i = 2; i < number; i++){
+        //     if(number % i == 0){
+        //         status = 0;
+        //         break;
+        //     }
+        // }
+
+        // if(status == 1){
+        //     document.write('<h1>Prime Number</h1>');
+        // } else {
+        //     document.write('<h1>Not a Prime Number</h1>');
+        // }
+
+
+        // Perfect Number
+        var number = prompt('Enter the number');
+        var sum = 0;
+
+        for(var i = 1; i < number; i++){
+            if(number % i == 0){
+                sum += i; // sum = sum + i;
+            }
+        }
+
+        if(number == sum){
+            document.write('<h1>Perfect Number</h1>');
+        } else {
+            document.write('<h1>Not a Perfect Number</h1>');
+        }
+        
+
+
+    </script>
+</body>
+</html>

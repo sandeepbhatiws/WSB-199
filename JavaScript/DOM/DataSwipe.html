@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .row{
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            margin-top: 50px;
+            gap: 50px;
+            text-align: center;
+        }
+        .column{
+            border: 1px solid gray;
+            padding: 15px;
+            box-sizing: border-box;
+            flex-basis: 50%;
+            border-radius: 20px;
+        }
+        .row button{
+            background-color: black;
+            color: white;
+            margin: auto;
+            padding: 10px 15px;
+            border: 0px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="row">
+        <div class="column" id="column1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus accusamus voluptate vel, deleniti cumque soluta quaerat minima. 
+        </div>
+        <div class="column" id="column2">
+            Inventore eius quae sint veniam totam iure culpa, doloribus eligendi necessitatibus? Earum, dolor.
+        </div>
+    </div>
+
+    <div class="row">
+        <button onclick="swipeData()">Swipe Data</button>
+    </div>
+
+    <script>
+        function swipeData(){
+            column1 = document.getElementById('column1').innerText;
+            column2 = document.getElementById('column2').innerText;
+
+            document.getElementById('column1').innerText = column2;
+            document.getElementById('column2').innerText = column1;
+        }
+    </script>
+
+</body>
+</html>

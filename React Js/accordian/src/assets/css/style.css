@@ -1,0 +1,33 @@
+*{
+      margin: 0;
+      padding: 0;
+    }
+    .faq{
+      border: 6px double black;
+      width: 1200px;
+      margin: auto;
+    }
+    .faqItem{
+      border: 1px solid black;
+    }
+    .faqQUEST{
+      padding: 15px;
+      background: skyblue;
+      cursor: pointer; /* Add cursor style */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .faqANS{
+      background: lightblue;
+      padding: 15px;
+      border-top: 2px solid black;
+      display: none;
+    }
+    .addANS{
+      display: block;
+    }
+    .icon{
+      font-size: 32px;
+      font-weight: bold;
+    }

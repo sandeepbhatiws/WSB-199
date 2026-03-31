@@ -1,0 +1,8 @@
+[
+  {"id":1,"name":"Gooey Mug","price":18.99,"desc":"A mug that looks like a blob of color.","img":"https://picsum.photos/seed/mug/800/600"},
+  {"id":2,"name":"Silky Poster","price":12.5,"desc":"Poster with smooth gradient art.","img":"https://picsum.photos/seed/poster/800/600"},
+  {"id":3,"name":"Soft Pillow","price":29.0,"desc":"Plush pillow in goo-inspired colors.","img":"https://picsum.photos/seed/pillow/800/600"},
+  {"id":4,"name":"Liquid Lamp","price":49.9,"desc":"Mood lamp with soft transitions.","img":"https://picsum.photos/seed/lamp/800/600"},
+  {"id":5,"name":"Sticker Pack","price":6.5,"desc":"Sticker pack for laptops and water bottles.","img":"https://picsum.photos/seed/sticker/800/600"},
+  {"id":6,"name":"Goo Throw","price":39.99,"desc":"Cozy throw blanket with abstract print.","img":"https://picsum.photos/seed/throw/800/600"}
+]

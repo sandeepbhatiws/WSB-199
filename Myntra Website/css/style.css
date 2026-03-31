@@ -1,0 +1,159 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+body{
+	font-family: "Roboto", sans-serif;
+}
+.main{
+	width: 100%;
+}
+.outer_header{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 22px 58px;
+	box-sizing: border-box;
+	gap: 60px;
+	box-shadow: 0px 1px 1px 0px dimgray;
+	position: sticky;
+	top: 0px;
+	background: white;
+	width: 100%;
+}
+.logo img{
+	width: 55px;
+}
+.header_menu{
+	margin-left: 15px;
+}
+.header_menu ul{
+	display: flex;
+	list-style: none;
+	gap: 35px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #282C3F;
+	font-size: 13px;
+}
+.outer_search_box{
+	display: flex;
+	background: #F5F5F6;
+	padding: 10px 15px;
+	border-radius: 5px;
+	align-items: center;
+	flex-grow: 1;
+	gap: 10px;
+}
+.header_right{
+	display: flex;
+	gap: 25px;
+	text-align: center;
+}
+.profile_text{
+	margin-top: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.search_icon{
+	color: #717288;
+}
+.search_box{
+	border: 0px solid red;
+	flex-grow: 1;
+}
+.search_box input{
+	width: 100%;
+	border: 0px;
+	background: #F5F5F6;
+}
+
+.search_box input:focus-visible{
+	outline: 0px;
+}
+.outer_offer{
+	border: 0px solid red;
+	padding: 20px 60px;
+	box-sizing: border-box;
+}
+.outer_offer img{
+	width: 100%;
+}
+.banner{
+	padding: 0px;
+}
+
+.rising_star_heading{
+	padding: 80px 35px;
+	letter-spacing: 5px;
+	color: #3E4152;
+}
+.rising_star{
+	display: flex;
+}
+.rising_star img{
+	width: 100%;
+}
+.category_heading{
+	padding: 80px 35px;
+	letter-spacing: 5px;
+	color: #3E4152;
+}
+.inner_category{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.category{
+	flex-basis: 16.66%;
+}
+.inner_category img{
+	width: 100%;
+}
+
+.outer_popular_section{
+	width: 100%;
+}
+.inner_popular_section{
+	width: 1200px;
+	padding: 50px 0px;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.border{
+/*	border-top: 1px solid black;*/
+	flex-grow: 1;
+
+	padding: 1px;
+	background: red;
+}
+
+.popular_heading{
+	font-weight: bold;
+	font-size: 18px;
+}
+.popular_heading span{
+	color: blueviolet;
+}
+
+.bellicon{
+	font-size: 32px;
+	color: white;
+}
+.outer_bellicon{
+	background: black;
+	display: inline-block;
+	padding: 10px 7px;
+	border-radius: 50%;
+	position: fixed;
+	right: 25px;
+	bottom: 25px;
+}

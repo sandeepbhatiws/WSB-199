@@ -1,0 +1,29 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.text-center{
+    text-align: center;
+    font-size: 28px;
+}
+
+.count{
+    text-align: center;
+}
+
+.count button{
+    margin-top: 25px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    padding: 10px 15px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        var from    = prompt('Enter the from (K, C, F)').toUpperCase();
+        var to      = prompt('Enter the to (K, C, F)').toUpperCase();
+        var value   = Number(prompt('Enter the value'));
+
+
+        if(from == 'C' && to == 'F'){
+            formula = (value * 9/5) + 32;
+            document.write(formula);
+        } else if(from == 'C' && to == 'K'){
+            formula = value + 273.15;
+            document.write(formula); 
+        } else {
+            document.write('Invalid Value');
+        }
+    </script>
+</body>
+</html>

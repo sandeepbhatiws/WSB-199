@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Handling</title>
+        <link rel="stylesheet" href="css/style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <div class="outer_form">
+                <div>
+                    <h1>User Form</h1>
+                </div>
+                <form id="form_handler" autocomplete="off">
+                    <div class="form-control">
+                        <label>Name</label>
+                        <input type="text" name="name" autocomplete="off"/>
+                    </div>
+                    <div class="form-control">
+                        <label>Email</label>
+                        <input type="text" name="email"/>
+                    </div>
+                    <div class="form-control">
+                        <label>Mobile Number</label>
+                        <input type="text" name="mobile_number"/>
+                    </div>
+                    <div>
+                        <button>Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="outer_data">
+                <div>
+                    <h2>User Data</h2>
+                </div>
+                <div class="user_data">
+                    <table border="1" width="100%" cellpadding="10" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile Number</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user_data">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="js/custom.js"></script>
+    </body>
+</html>

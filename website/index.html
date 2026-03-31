@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gooey Shop — Home</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <nav class="site-nav">
+      <div class="site-brand">
+        <div class="logo">G</div>
+        <div>
+          <div style="font-weight:700;color:#fff">Gooey Store</div>
+          <div style="font-size:12px;opacity:0.85">Playful demo shop</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="shop.html" class="btn">Shop</a>
+        <a href="shop.html" class="btn secondary">Products</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="left">
+        <h1>Beautiful, playful products inspired by goo.</h1>
+        <p>Browse our demo catalog — click items to preview, add to cart, and try checkout.</p>
+        <div class="cta"><a href="shop.html" class="btn">Start shopping</a></div>
+      </div>
+      <div style="width:48%;">
+        <svg class="visually-hidden" width="0" height="0" aria-hidden="true">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur"/>
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -7" result="goo"/>
+              <feBlend in="SourceGraphic" in2="goo"/>
+            </filter>
+          </defs>
+        </svg>
+        <section class="scene">
+          <div class="goo" id="goo"></div>
+        </section>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px;text-align:center;opacity:0.8">This is a static demo — no real payments.</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

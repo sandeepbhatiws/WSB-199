@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        english =  parseInt(prompt('Enter the marks in english'));
+        hindi = parseInt(prompt('Enter the marks in hindi'));
+        maths = parseInt(prompt('Enter the marks in maths'));
+
+        average = (english + hindi + maths) / 3;
+
+        if(english > 100 || hindi > 100 || maths > 100){
+            
+            document.write('<h1>Invalid value</h1>')
+        } else if(average >= 90 && average <=100){
+            document.write('<h1>A Grade</h1>')
+        } else if(average >= 70){
+            document.write('<h1>B Grade</h1>')
+        }
+
+
+    </script>
+</body>
+</html>

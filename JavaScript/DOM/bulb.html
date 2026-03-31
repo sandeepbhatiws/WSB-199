@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulb</title>
+
+    <style>
+        .row{
+            width: 200px;
+            margin: auto;
+        }
+        .row img{
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .row button{
+            background-color: black;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 15px;
+            border: 0px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="row">
+        <img src="images/off.gif" id="image"/>
+        <button onclick="changeBulb()" id="btn"> On </button>
+    </div>
+
+
+    <script>
+
+        function changeBulb(){
+            var btn = document.getElementById('btn');
+
+            if(btn.innerText == 'On'){
+                btn.innerText = 'Off';
+                document.getElementById('image').src = 'images/on.gif';
+            } else {
+                btn.innerText = 'On';
+                document.getElementById('image').src = 'images/off.gif';
+            }
+
+            console.log(btn.innerText);
+           
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #output{
+            margin-top: 50px;
+            border: 1px solid black;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- <input onkeyup="getValue(this)"/> -->
+
+    <input onchange="getValue(this)"/>
+
+
+    <div id="output"></div>
+
+    <script>
+        function getValue(text){
+            console.log(text.value);
+            document.getElementById('output').innerText = text.value
+        }
+    </script>
+</body>
+</html>

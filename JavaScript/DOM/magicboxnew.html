@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .row{
+            width: 450px;
+            display: flex;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+        .column{
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            padding-top: 70px;
+            font-weight: bold;
+            box-sizing: border-box;
+            border: 1px solid black;
+            background-color: gray;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="row">
+        <div class="column">1</div>
+        <div class="column">2</div>
+        <div class="column">3</div>
+        <div class="column">4</div>
+        <div class="column">5</div>
+        <div class="column">6</div>
+        <div class="column">7</div>
+        <div class="column">8</div>
+        <div class="column">9</div>
+    </div>
+    <script>
+        var numbers = [];
+
+        var allColumns = document.querySelectorAll('.column');
+
+        allColumns.forEach((value, index) => {
+            value.addEventListener('mouseover', (a) => {
+                if(numbers.length < 9){
+                    a.target.style.backgroundColor = 'red';
+
+                    if(!numbers.includes(a.target.innerText)){
+                        numbers.push(a.target.innerText);
+                    }
+                }
+            })
+
+            value.addEventListener('mouseout', (a) => {
+                a.target.style.backgroundColor = 'gray';
+            })
+        })
+
+
+        
+
+
+    </script>
+</body>
+</html>

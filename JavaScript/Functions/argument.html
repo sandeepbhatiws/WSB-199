@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argument Function</title>
+</head>
+<body>
+
+    <button onclick="userInfo('Sandeep', 'Bhati', 123456)">On Click</button>
+    <button onclick="add(10,10)">Add (10+10)</button>
+    <button onclick="add(20,20)">Add (20+20)</button>
+
+    <script>
+        function userInfo(fname, lname, mobile){
+            console.log(fname);
+            console.log(lname);
+            console.log(mobile);
+        }
+
+        function add(a, b){
+            c = a +b;
+            console.log(c)
+        }
+    </script>
+</body>
+</html>

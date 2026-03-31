@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	color: black;
+	text-decoration: none;
+}
+body{
+	font-family: "Inter", sans-serif;
+}
+.main{
+	width: 100%;
+	box-sizing: border-box;
+}
+.outer_header{
+	width: 100%;
+	background: white;
+}
+.header{
+	max-width: 1170px;
+	margin: auto;
+	border: 0px solid black;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.header_right{
+	display: flex;
+	padding-top: 18px;
+	gap: 10px;
+}
+.outer_header_right{
+	display: flex;
+	align-items: center;
+}
+.whatsup{
+	padding-top: 5px;
+}
+.header_left{
+	padding-top: 22px;
+}
+.call_us{
+	border-radius: 8px;
+	border-width: 1px;
+	padding: 10px 18px;
+	background: linear-gradient(93.77deg, #0ACEFE -6.36%, #2699FB 50.16%);
+	border: 1px solid;
+	border-image-source: linear-gradient(93.77deg, #0ACEFE -6.36%, #2699FB 50.16%);
+	box-shadow: 0px 1px 2px 0px #1018280D;
+	font-weight: 500;
+	font-style: Medium;
+	font-size: 16px;
+	line-height: 24px;
+	color: #FFFFFF;
+}
+.outer_header_right{
+	border-radius: 8px;
+	border-width: 1px;
+	padding: 10px 18px;
+	gap: 10px;
+	background: #FFFFFF;
+	border: 1px solid #27AE60;
+	box-shadow: 0px 1px 2px 0px #1018280D;
+}
+.chat_with_us{
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 16px;
+	line-height: 24px;
+	text-transform: capitalize;
+	color: #27AE60;
+}
+
+.outer_career{
+	width: 100%;
+	background: white;
+}
+.inner_career{
+	max-width: 1170px;
+	margin: auto;
+	display: flex;
+}
+.career_left{
+	border: 0px solid red;
+	flex-basis: 48%;
+}
+
+.career_right{
+	border: 1px solid red;
+	height: 200px;
+	flex-grow: 1;
+}
+.career_content h1{
+	font-weight: 700;
+	font-style: Bold;
+	font-size: 52px;
+	line-height: 68px;
+	padding-bottom: 15px;
+}
+.career_content span{
+	color: #2699FB;
+	background-image: url('../images/borderbottom.png');
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
+.career_content p{
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 22px;
+	line-height: 35px;
+	color: #0A2134;
+	padding-bottom: 15px;
+}
+.content{
+	display: flex;
+	align-items: center;
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 22px;
+	color: #0A2134;
+	padding-bottom: 15px;
+	gap: 10px;
+}
+.content_image{
+	width: 24px;
+	height: 24px;
+}
+.career_buttons{
+	display: flex;
+	margin-top: 15px;
+	gap: 15px;
+}
+.book_demo{
+	border-radius: 8px;
+	border-width: 1px;
+	padding: 16px 48px;
+	background: linear-gradient(93.77deg, #0ACEFE -6.36%, #2699FB 50.16%);
+	border: 1px solid;
+	border-image-source: linear-gradient(93.77deg, #0ACEFE -6.36%, #2699FB 50.16%);
+	box-shadow: 0px 4px 14px 2px #2699FB61;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 28px;
+	color: #FFFFFF;
+}
+.download_curriculam{
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	border-width: 1px;
+	padding: 16px 28px;
+	gap: 10px;
+	background: #FFFFFF;
+	border: 1px solid #D0D5DD;
+	box-shadow: 0px 1px 3px 0px #1018281A;
+}
+.curriculam{
+	font-weight: 500;
+	font-style: Medium;
+	font-size: 18px;
+	line-height: 28px;
+	text-align: center;
+	color: #0A2134;
+}
