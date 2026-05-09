@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+import { useNavigate, useNavigation } from 'react-router';
 import { toast } from 'react-toastify';
 
 const CommonContext = createContext();
@@ -7,51 +8,60 @@ export default function ContextApi({ children }) {
 
     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
     const [cartData, setCartData] = useState(cartItems ?? []);
+    const [isLogin, setIsLogin] = useState(0);
+
+    const navigate = useNavigate();
 
     const addToCart = (productInfo) => {
 
-        const checkCart = cartData.filter((v) => {
-            if (productInfo.id == v.id) {
-                return v
-            }
-        })
-
-        if (checkCart.length == 0) {
-            const dataSave = {
-                id: productInfo.id,
-                name: productInfo.name,
-                image: productInfo.image,
-                price: productInfo.price,
-                description: productInfo.description,
-                quantity: 1
-            }
-
-            const finalData = [dataSave, ...cartData]
-            setCartData(finalData);
-            localStorage.setItem('cartItems', JSON.stringify(finalData))
-            toast.success('Add to cart.')
+        if (isLogin == 0) {
+            navigate('/login')
         } else {
-
-            const finalData = cartData.map((v) => {
+            const checkCart = cartData.filter((v) => {
                 if (productInfo.id == v.id) {
-                    if (v.quantity < 5) {
-                        v.quantity++;
-                        toast.success('Update Cart')
-                        return v;
-                    } else {
-                        toast.error('Maximum Quanity reached.')
-                        return v;
-                    }
-
-                } else {
-                    return v;
+                    return v
                 }
             })
 
-            setCartData(finalData);
-            localStorage.setItem('cartItems', JSON.stringify(finalData))
+            if (checkCart.length == 0) {
+                const dataSave = {
+                    id: productInfo.id,
+                    name: productInfo.name,
+                    image: productInfo.image,
+                    price: productInfo.price,
+                    description: productInfo.description,
+                    quantity: 1
+                }
 
+                const finalData = [dataSave, ...cartData]
+                setCartData(finalData);
+                localStorage.setItem('cartItems', JSON.stringify(finalData))
+                toast.success('Add to cart.')
+            } else {
+
+                const finalData = cartData.map((v) => {
+                    if (productInfo.id == v.id) {
+                        if (v.quantity < 5) {
+                            v.quantity++;
+                            toast.success('Update Cart')
+                            return v;
+                        } else {
+                            toast.error('Maximum Quanity reached.')
+                            return v;
+                        }
+
+                    } else {
+                        return v;
+                    }
+                })
+
+                setCartData(finalData);
+                localStorage.setItem('cartItems', JSON.stringify(finalData))
+
+            }
         }
+
+
     }
 
     const incrementCart = (id) => {
@@ -98,9 +108,9 @@ export default function ContextApi({ children }) {
 
     const deleteCart = (id) => {
 
-        if(confirm('Are you sure you want to remove ?')){
+        if (confirm('Are you sure you want to remove ?')) {
             const finalData = cartData.filter((v) => {
-                if(id != v.id){
+                if (id != v.id) {
                     return v
                 }
             })
@@ -108,7 +118,7 @@ export default function ContextApi({ children }) {
             setCartData(finalData);
             localStorage.setItem('cartItems', JSON.stringify(finalData))
             toast.success('Delete succussfully.')
-        }        
+        }
     }
 
 
@@ -138,13 +148,13 @@ export default function ContextApi({ children }) {
             toast.success('Add to favourite.')
         } else {
 
-            if(favouriteData.length == 1){
+            if (favouriteData.length == 1) {
                 const finalData = [];
 
                 setFavouriteData(finalData);
                 localStorage.setItem('favouriteItems', JSON.stringify(finalData))
                 toast.success('Remove from favourite.')
-            } else{
+            } else {
                 const finalData = favouriteData.map((v) => {
                     if (productInfo.id != v.id) {
                         return v;
@@ -155,11 +165,11 @@ export default function ContextApi({ children }) {
                 localStorage.setItem('favouriteItems', JSON.stringify(finalData))
                 toast.success('Remove from favourite.')
             }
-            
+
         }
     }
 
-    const data = { cartData, addToCart, incrementCart, decrementCart, deleteCart, addToFavourite, favouriteData }
+    const data = { isLogin, cartData, addToCart, incrementCart, decrementCart, deleteCart, addToFavourite, favouriteData }
 
     return (
         <>
