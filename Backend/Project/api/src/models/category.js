@@ -5,13 +5,13 @@ const schema = new mongoose.Schema({
         type : String,
         required : [true, 'Name is required'],
         match: /^[a-z A-Z]{2,15}$/,
-        validate: {
-            validator: async function(v) {
-                const name = await this.constructor.findOne({ name: v, deleted_at : null });
-                return !name;
-            },
-            message: props => `The specified name is already in use.`
-        }
+        // validate: {
+        //     validator: async function(v) {
+        //         const name = await this.constructor.findOne({ name: v, deleted_at : null });
+        //         return !name;
+        //     },
+        //     message: props => `The specified name is already in use.`
+        // }
     },
     slug : {
         type : String,

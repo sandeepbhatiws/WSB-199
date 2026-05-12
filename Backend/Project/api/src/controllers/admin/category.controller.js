@@ -15,23 +15,32 @@ const generateUniqueSlug = async (Model, baseSlug) => {
 };
 
 exports.create = async(request, response) => {
+
+    var dataSave = {};
+
+    // For Single Image 
+    console.log(request.file)
     
-    const dataSave = request.body;
+    if(request.body){
+        dataSave = request.body;
+    }
 
-    if(request.body.slug == undefined || request.body.slug == ''){
-        var slug = slugify(request.body.name, {
-            lower: true,
-            strict: true,
-        })
+    if(request.body){
+        if(request.body.slug == undefined || request.body.slug == ''){
+            var slug = slugify(request.body.name, {
+                lower: true,
+                strict: true,
+            })
 
-        dataSave.slug = await generateUniqueSlug(categoryModal, slug);
-    } else {
-        var slug = slugify(request.body.slug, {
-            lower: true,
-            strict: true,
-        })
+            dataSave.slug = await generateUniqueSlug(categoryModal, slug);
+        } else {
+            var slug = slugify(request.body.slug, {
+                lower: true,
+                strict: true,
+            })
 
-        dataSave.slug = await generateUniqueSlug(categoryModal, slug);
+            dataSave.slug = await generateUniqueSlug(categoryModal, slug);
+        }
     }
 
     categoryModal(dataSave).save()
