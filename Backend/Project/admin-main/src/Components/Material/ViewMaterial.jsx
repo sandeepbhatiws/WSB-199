@@ -17,7 +17,7 @@ export default function ViewMaterial() {
   const [apiStatus, setApiStatus] = useState(0);
 
   useEffect(() => {
-    axios.post('http://localhost:5000/api/admin/material/view', {
+    axios.post(`${import.meta.env.VITE_API_BASE_URL}/material/view`, {
       name: filterData.name,
       order: filterData.order,
       page: currentPage,

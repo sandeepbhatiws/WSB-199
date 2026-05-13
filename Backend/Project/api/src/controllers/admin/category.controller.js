@@ -1,5 +1,6 @@
 const categoryModal = require("../../models/category");
 var slugify = require('slugify')
+require('dotenv').config()
 
 const generateUniqueSlug = async (Model, baseSlug) => {
   let slug = baseSlug;
@@ -23,6 +24,10 @@ exports.create = async(request, response) => {
     
     if(request.body){
         dataSave = request.body;
+    }
+
+    if(request.file){
+        dataSave.image = request.file.filename;
     }
 
     if(request.body){
@@ -117,14 +122,15 @@ exports.view = async(request, response) => {
         filter.$or = orCondition;
     }
 
-    var totalRecords = await materialModal.find(filter).countDocuments();
+    var totalRecords = await categoryModal.find(filter).countDocuments();
     
-    materialModal.find(filter).select("name slug image order status").limit(limit).skip(skip).sort(sorting)
+    categoryModal.find(filter).select("name slug image order status").limit(limit).skip(skip).sort(sorting)
     .then((result) => {
         if(result.length > 0){
             const data = {
                 _status : true,
                 _message : 'Record fetch succussfully.',
+                _image_path : `${ process.env.image_url }categories`,
                 _paginate : {
                     total_records : totalRecords,
                     current_page : page,
@@ -164,6 +170,7 @@ exports.details = async(request, response) => {
             const data = {
                 _status : true,
                 _message : 'Record fetch succussfully.',
+                _image_path : `${ process.env.image_url }categories`,
                 _data : result
             }
             response.send(data);
@@ -188,6 +195,10 @@ exports.details = async(request, response) => {
 
 exports.update = async(request, response) => {
     const dataSave = request.body;
+
+    if(request.file){
+        dataSave.image = request.file.filename;
+    }
 
     var getDetails = await categoryModal.findOne({ _id : request.params.id });
 

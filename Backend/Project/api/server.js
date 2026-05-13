@@ -16,6 +16,8 @@ server.get('/', (request, response) => {
     response.send('Server is working fine!')
 })
 
+server.use('/uploads', express.static('uploads'));
+
 // Website Routes
 
 
