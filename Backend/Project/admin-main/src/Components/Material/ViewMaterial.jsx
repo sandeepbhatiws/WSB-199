@@ -471,13 +471,7 @@ export default function ViewMaterial() {
                 </tbody>
 
               </table>
-
-
-
             </div>
-
-
-
           </div>
 
           <div className='mt-5'>

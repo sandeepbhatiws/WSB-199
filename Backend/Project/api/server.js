@@ -24,6 +24,7 @@ server.use('/uploads', express.static('uploads'));
 // Admin Routes
 require('./src/routes/admin/material.routes')(server)
 require('./src/routes/admin/category.routes')(server)
+require('./src/routes/admin/subCategory.routes')(server)
 
 
 // Application Routes

@@ -125,7 +125,6 @@ export default function AddMaterial() {
     }
   };
 
-
   let ErrorHandler = (event) => {
     let fieldName = event.target.name;
 
@@ -140,7 +139,6 @@ export default function AddMaterial() {
       setErrors(updated);
     }
   };
-
 
   return (
     <>

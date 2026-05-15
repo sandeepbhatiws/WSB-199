@@ -42,6 +42,7 @@ createRoot(document.getElementById('root')).render(
         </Route>
         <Route path='category'>
           <Route path='add' element={<AddCategory />} />
+          <Route path='update/:id' element={<AddCategory />} />
           <Route path='view' element={<ViewCategory />} />
         </Route>
         <Route path='sub-category'>
