@@ -1,6 +1,8 @@
 const categoryModal = require("../../models/category");
 var slugify = require('slugify');
 const subCategoryModal = require("../../models/subCategory");
+const materialModal = require("../../models/material");
+const productModal = require("../../models/product");
 require('dotenv').config()
 
 const generateUniqueSlug = async (Model, baseSlug) => {
@@ -77,6 +79,132 @@ exports.parentCategory = async(request, response) => {
     })
 }
 
+exports.subCategory = async(request, response) => {
+    
+    var sorting = {
+        _id : 'desc'
+    }
+
+    var andCondition = [{
+        deleted_at : null,
+    }];
+
+    var orCondition = [];
+
+    if(request.body){
+        if(request.body.status != undefined && request.body.status != ''){
+            orCondition.push({ status : request.body.status })
+        }
+
+        if(request.body.parent_category_id != undefined && request.body.parent_category_id != ''){
+            andCondition.push({ parent_category_id : request.body.parent_category_id })
+        }
+
+        if(request.body.id != undefined && request.body.id != ''){
+            orCondition.push({ _id : request.body.id })
+        }
+    }
+
+    filter = {};
+
+    if(andCondition.length > 0){
+        filter.$and = andCondition;
+    }
+    
+    if(orCondition.length > 0){
+        filter.$or = orCondition;
+    }
+    
+    subCategoryModal.find(filter).select("name").sort(sorting)
+    .then((result) => {
+        if(result.length > 0){
+            const data = {
+                _status : true,
+                _message : 'Record fetch succussfully.',
+                _data : result
+            }
+            response.send(data);
+        } else {
+            const data = {
+                _status : false,
+                _message : 'No record found.',
+                _data : result
+            }
+            response.send(data);
+        }
+        
+    })
+    .catch((error) => {
+        const data = {
+            _status : false,
+            _message : 'Something went wrong.',
+            _data : [],
+        }
+        response.send(data);
+    })
+}
+
+exports.materials = async(request, response) => {
+    
+    var sorting = {
+        _id : 'desc'
+    }
+
+    var andCondition = [{
+        deleted_at : null,
+    }];
+
+    var orCondition = [];
+
+    if(request.body){
+        if(request.body.status != undefined && request.body.status != ''){
+            orCondition.push({ status : request.body.status })
+        }
+
+        if(request.body.id != undefined && request.body.id != ''){
+            orCondition.push({ _id : request.body.id })
+        }
+    }
+
+    filter = {};
+
+    if(andCondition.length > 0){
+        filter.$and = andCondition;
+    }
+    
+    if(orCondition.length > 0){
+        filter.$or = orCondition;
+    }
+    
+    materialModal.find(filter).select("name").sort(sorting)
+    .then((result) => {
+        if(result.length > 0){
+            const data = {
+                _status : true,
+                _message : 'Record fetch succussfully.',
+                _data : result
+            }
+            response.send(data);
+        } else {
+            const data = {
+                _status : false,
+                _message : 'No record found.',
+                _data : result
+            }
+            response.send(data);
+        }
+        
+    })
+    .catch((error) => {
+        const data = {
+            _status : false,
+            _message : 'Something went wrong.',
+            _data : [],
+        }
+        response.send(data);
+    })
+}
+
 exports.create = async(request, response) => {
 
     var dataSave = {};
@@ -85,8 +213,21 @@ exports.create = async(request, response) => {
         dataSave = request.body;
     }
 
-    if(request.file){
-        dataSave.image = request.file.filename;
+    if(request.files != undefined){
+   
+        if(request.files.image != undefined){
+            dataSave.image = request.files.image[0].filename;
+        }
+
+        if(request.files.images != undefined){
+            var images = [];
+
+            request.files.images.forEach((v) => {
+                images.push(v.filename);
+            })
+
+            dataSave.images = images;
+        }
     }
 
     if(request.body){
@@ -96,18 +237,18 @@ exports.create = async(request, response) => {
                 strict: true,
             })
 
-            dataSave.slug = await generateUniqueSlug(subCategoryModal, slug);
+            dataSave.slug = await generateUniqueSlug(productModal, slug);
         } else {
             var slug = slugify(request.body.slug, {
                 lower: true,
                 strict: true,
             })
 
-            dataSave.slug = await generateUniqueSlug(subCategoryModal, slug);
+            dataSave.slug = await generateUniqueSlug(productModal, slug);
         }
     }
 
-    subCategoryModal(dataSave).save()
+    productModal(dataSave).save()
     .then((result) => {
         const data = {
             _status : true,
@@ -169,6 +310,10 @@ exports.view = async(request, response) => {
         if(request.body.parent_category_id != undefined && request.body.parent_category_id != ''){
             andCondition.push({ parent_category_id : request.body.parent_category_id })
         }
+
+        if(request.body.sub_category_id != undefined && request.body.sub_category_id != ''){
+            andCondition.push({ sub_category_id : request.body.sub_category_id })
+        }
     }
 
     filter = {};
@@ -181,17 +326,19 @@ exports.view = async(request, response) => {
         filter.$or = orCondition;
     }
 
-    var totalRecords = await subCategoryModal.find(filter).countDocuments();
+    var totalRecords = await productModal.find(filter).countDocuments();
     
-    subCategoryModal.find(filter).select("name parent_category_id slug image order status")
+    productModal.find(filter)
     .populate('parent_category_id', 'name')
+    .populate('sub_category_id', 'name')
+    .populate('material_id', 'name')
     .limit(limit).skip(skip).sort(sorting)
     .then((result) => {
         if(result.length > 0){
             const data = {
                 _status : true,
                 _message : 'Record fetch succussfully.',
-                _image_path : `${ process.env.image_url }categories`,
+                _image_path : `${ process.env.image_url }products`,
                 _paginate : {
                     total_records : totalRecords,
                     current_page : page,
@@ -222,16 +369,19 @@ exports.view = async(request, response) => {
 
 exports.details = async(request, response) => {
 
-    subCategoryModal.findOne({
+    productModal.findOne({
         _id : request.params.id,
         deleted_at : null
     })
+    .populate('parent_category_id', 'name')
+    .populate('sub_category_id', 'name')
+    .populate('material_id', 'name')
     .then((result) => {
         if(result){
             const data = {
                 _status : true,
                 _message : 'Record fetch succussfully.',
-                _image_path : `${ process.env.image_url }categories`,
+                _image_path : `${ process.env.image_url }products`,
                 _data : result
             }
             response.send(data);
@@ -257,11 +407,24 @@ exports.details = async(request, response) => {
 exports.update = async(request, response) => {
     const dataSave = request.body;
 
-    if(request.file){
-        dataSave.image = request.file.filename;
+    if(request.files != undefined){
+   
+        if(request.files.image != undefined){
+            dataSave.image = request.files.image[0].filename;
+        }
+
+        if(request.files.images != undefined){
+            var images = [];
+
+            request.files.images.forEach((v) => {
+                images.push(v.filename);
+            })
+
+            dataSave.images = images;
+        }
     }
 
-    var getDetails = await subCategoryModal.findOne({ _id : request.params.id });
+    var getDetails = await productModal.findOne({ _id : request.params.id });
 
     if(getDetails.slug != request.body.slug){
         if(request.body.slug == undefined || request.body.slug == ''){
@@ -270,20 +433,20 @@ exports.update = async(request, response) => {
                 strict: true,
             })
 
-            dataSave.slug = await generateUniqueSlug(subCategoryModal, slug);
+            dataSave.slug = await generateUniqueSlug(productModal, slug);
         } else {
             var slug = slugify(request.body.slug, {
                 lower: true,
                 strict: true,
             })
 
-            dataSave.slug = await generateUniqueSlug(subCategoryModal, slug);
+            dataSave.slug = await generateUniqueSlug(productModal, slug);
         }
     }
 
     dataSave.updated_at = Date.now()
 
-    subCategoryModal.updateOne(
+    productModal.updateOne(
         {
             _id : request.params.id
         },
@@ -328,7 +491,7 @@ exports.update = async(request, response) => {
 
 exports.changeStatus = async(request, response) => {
 
-    subCategoryModal.updateMany(
+    productModal.updateMany(
         {
             _id : request.body.ids
         },
@@ -381,7 +544,7 @@ exports.changeStatus = async(request, response) => {
 
 exports.destroy = async(request, response) => {
 
-    subCategoryModal.updateMany(
+    productModal.updateMany(
         {
             _id : request.body.ids
         },

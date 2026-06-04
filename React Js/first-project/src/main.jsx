@@ -5,6 +5,6 @@ import HomePage from './HomePage'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HomePage/>
-    <HomePage></HomePage>
+    {/* <HomePage></HomePage> */}
   </StrictMode>,
 )

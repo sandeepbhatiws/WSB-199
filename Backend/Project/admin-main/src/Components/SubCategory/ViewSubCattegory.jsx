@@ -1,10 +1,34 @@
-import React, { useState } from "react";
-import { FaFilter } from "react-icons/fa";
+import React, { useEffect, useState } from 'react'
+import { FaFilter, FaEdit } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { Link } from "react-router-dom";
 import iziToast from "izitoast";
+import axios from 'axios';
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic-light-dark.css';
 
 export default function ViewSubCattegory() {
+
+  let [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios.post(`${import.meta.env.VITE_API_BASE_URL}/sub-category/parent-category`)
+      .then((result) => {
+        if (result.data._status) {
+          setCategories(result.data._data);
+        } else {
+          setCategories([])
+        }
+      })
+      .catch(() => {
+        iziToast.error({
+          title: "Error",
+          message: "Something went wrong.",
+          position: "topRight",
+        });
+      })
+  }, [])
+
   const [openFilter, setOpenFilter] = useState(false);
   const [filterData, setFilterData] = useState({ name: "", parent_category: "" });
   const [selectedRecord, setSelectedRecord] = useState([]);
@@ -162,17 +186,28 @@ export default function ViewSubCattegory() {
               </div>
 
               {/* Parent Category Name */}
-              <div className="mb-5">
-                <label className="block mb-2 font-medium text-gray-700">Parent Category Name</label>
-                <input
-                  type="text"
-                  name="parent_category"
-                  autoComplete="off"
-                  placeholder="Enter Parent Category Name"
-                  className="text-[17px] border border-slate-300 rounded-lg 
-                  focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 
-                  block w-full py-2.5 px-3"
-                />
+              <div className="mb-6">
+                <label className="block mb-2 text-md font-medium text-gray-700">
+                  Select Parent Category
+                </label>
+
+                <select
+                  name="parent_category_id"
+                  defaultValue=""
+                  className="text-[17px] border cursor-pointer border-slate-300 text-gray-900 rounded-lg 
+focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 
+block w-full py-2.5 px-3"
+                >
+                  <option value="">Select Category</option>
+
+                  {
+                    categories.map((v, i) => {
+                      return (
+                        <option value={v._id}>{v.name}</option>
+                      )
+                    })
+                  }
+                </select>
               </div>
 
             </div>

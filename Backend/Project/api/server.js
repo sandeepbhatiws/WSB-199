@@ -19,12 +19,13 @@ server.get('/', (request, response) => {
 server.use('/uploads', express.static('uploads'));
 
 // Website Routes
-
+require('./src/routes/website/user.routes')(server)
 
 // Admin Routes
 require('./src/routes/admin/material.routes')(server)
 require('./src/routes/admin/category.routes')(server)
 require('./src/routes/admin/subCategory.routes')(server)
+require('./src/routes/admin/product.routes')(server)
 
 
 // Application Routes

@@ -1,10 +1,38 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import iziToast from 'izitoast';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { MdOutlineDriveFolderUpload } from "react-icons/md";
+
 
 export default function AddSubCategory() {
 
-    let [errors, setErrors] = useState([]);
+    let [categories, setCategories] = useState([]);
+    let [parent_category_id, setParentCategoryId] = useState('');
+
+    useEffect(() => {
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/sub-category/parent-category`,{
+            status : true,
+            id : parent_category_id
+        })
+        .then((result) => {
+            if(result.data._status){
+                setCategories(result.data._data);
+            } else {
+                setCategories([])
+            }
+        })
+        .catch(() => {
+            iziToast.error({
+                title: "Error",
+                message: "Something went wrong.",
+                position: "topRight",
+            });
+        })
+    },[parent_category_id])
+
     let [SelectedImage, setSelectedImage] = useState("");
+    let [errors, setErrors] = useState([]);
 
     let handleimagechange = (event) => {
         const file = event.target.files[0];
@@ -12,40 +40,64 @@ export default function AddSubCategory() {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setSelectedImage(reader.result);
+
+                let updated = errors.filter((v) => v !== 'image');
+                setErrors(updated);
             };
             reader.readAsDataURL(file);
         }
     };
-let ErrorHandler = (event) => {
 
-    let fieldName = event.target.name;
-    let value = event.target.value;
+    var [subCategoryId, setSubCategoryId] = useState('');
+    var [subCategoryDetails, setSubCategoryDetails] = useState('');
 
-    if (!value || value.trim() === "") {
+    const navigate = useNavigate();
+    const params = useParams();
 
-        if (!errors.includes(fieldName)) {
-            setErrors([...errors, fieldName]);
+    useEffect(() => {
+        setSubCategoryId(params.id);
+
+        if (params.id) {
+            axios.post(`${import.meta.env.VITE_API_BASE_URL}/sub-category/details/${params.id}`)
+                .then((result) => {
+                    if (result.data._status) {
+                        setSubCategoryDetails(result.data._data)
+                        setParentCategoryId(result.data._data.parent_category_id)
+                        if(result.data._data.image){
+                            setSelectedImage(result.data._image_path+'/'+result.data._data.image)
+                        }
+                    } else {
+                        iziToast.error({
+                            title: "Error",
+                            message: result.data._messsage,
+                            position: "topRight",
+                        });
+                    }
+                })
+                .catch(() => {
+                    iziToast.error({
+                        title: "Error",
+                        message: "Something went wrong.",
+                        position: "topRight",
+                    });
+                })
         }
 
-    } else {
-
-        let updated = errors.filter((v) => v !== fieldName);
-        setErrors(updated);
-
-    }
-};
+    }, [params])
 
     let formhandler = (event) => {
         event.preventDefault();
 
         let form = event.target;
-        let fields = form.querySelectorAll('input , textarea , select')
+        let fields = form.querySelectorAll("input,select")
 
         let newErrors = [];
 
         fields.forEach((field) => {
-            if (!field.value.trim()) {
-                newErrors.push(field.name);
+            if(field.name != 'image'){
+                if (!field.value.trim()) {
+                    newErrors.push(field.name);
+                }
             }
         });
 
@@ -57,10 +109,77 @@ let ErrorHandler = (event) => {
         setErrors(newErrors);
 
         if (newErrors.length === 0) {
-            event.target.reset()
+
+            if (subCategoryId) {
+                axios.put(`${import.meta.env.VITE_API_BASE_URL}/sub-category/update/${subCategoryId}`, event.target)
+                    .then((result) => {
+                        if (result.data._status == true) {
+                            event.target.reset()
+                            navigate('/sub-category/view')
+                            iziToast.success({
+                                title: "Success",
+                                message: result.data._message,
+                                position: "topRight",
+                            });
+                        } else {
+                            iziToast.error({
+                                title: "Error",
+                                message: result.data._message,
+                                position: "topRight",
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        iziToast.error({
+                            title: "Error",
+                            message: "Something went wrong.",
+                            position: "topRight",
+                        });
+                    })
+            } else {
+                axios.post(`${import.meta.env.VITE_API_BASE_URL}/sub-category/create`, event.target)
+                    .then((result) => {
+                        if (result.data._status == true) {
+                            event.target.reset()
+                            navigate('/sub-category/view')
+                            iziToast.success({
+                                title: "Success",
+                                message: result.data._message,
+                                position: "topRight",
+                            });
+                        } else {
+                            iziToast.error({
+                                title: "Error",
+                                message: result.data._message,
+                                position: "topRight",
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        iziToast.error({
+                            title: "Error",
+                            message: "Something went wrong.",
+                            position: "topRight",
+                        });
+                    })
+            }
         }
     };
 
+    let ErrorHandler = (event) => {
+        let fieldName = event.target.name;
+
+        if (event.target.value === "") {
+
+            if (!errors.includes(fieldName)) {
+                setErrors([...errors, fieldName]);
+            }
+
+        } else {
+            let updated = errors.filter((v) => v !== fieldName);
+            setErrors(updated);
+        }
+    };
 
     return (
         <>
@@ -73,7 +192,15 @@ let ErrorHandler = (event) => {
                         <li>/</li>
                         <li><a className="text-md font-medium hover:text-indigo-600">Sub Category</a></li>
                         <li>/</li>
-                        <li className="font-semibold text-gray-900">Add Sub Category</li>
+                        <li className="font-semibold text-gray-900">
+                            {
+                                subCategoryId
+                                ?
+                                'Update Sub Category'
+                                :
+                                'Add Sub Category'
+                            }
+                        </li>
                     </ol>
                 </nav>
 
@@ -84,7 +211,13 @@ let ErrorHandler = (event) => {
                         <h3 className="text-[24px] font-semibold 
                         bg-gradient-to-r from-indigo-600 to-indigo-500
                         py-3 px-5 rounded-t-lg text-white border border-indigo-500">
-                            Add New Sub Category
+                            {
+                                subCategoryId
+                                ?
+                                'Update Sub Category'
+                                :
+                                'Add Sub Category'
+                            }
                         </h3>
 
                         <form
@@ -127,6 +260,7 @@ let ErrorHandler = (event) => {
 
                                     <input
                                         type="file"
+                                        name='image'
                                         accept="image/*"
                                         onChange={handleimagechange}
                                         className="absolute inset-0 opacity-0 cursor-pointer"
@@ -134,7 +268,7 @@ let ErrorHandler = (event) => {
                                 </div>
 
                                 {errors.includes("image") && (
-                                    <p className="text-red-600 text-sm mt-1">image is required</p>
+                                    <p className="text-red-600 text-sm mt-1">Image is required</p>
                                 )}
                             </div>
 
@@ -149,19 +283,25 @@ let ErrorHandler = (event) => {
 
                                     <select
                                         onChange={ErrorHandler}
-                                        name="parent_id"
+                                        name="parent_category_id"
                                         defaultValue=""
                                         className="text-[17px] border cursor-pointer border-slate-300 text-gray-900 rounded-lg 
     focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 
     block w-full py-2.5 px-3"
                                     >
                                         <option value="">Select Category</option>
-                                        <option value="1">Electronics</option>
-                                        <option value="2">Clothes</option>
+
+                                        {
+                                            categories.map((v,i) => {
+                                                return(
+                                                    <option value={v._id}  selected={ v._id == parent_category_id ? 'selected' : '' }>{v.name}</option>
+                                                )
+                                            })
+                                        }
                                     </select>
 
-                                    {errors.includes("parent_id") && (
-                                        <p className="text-red-600 text-sm mt-1">parent-category is required</p>
+                                    {errors.includes("parent_category_id") && (
+                                        <p className="text-red-600 text-sm mt-1">Parent Category is required</p>
                                     )}
                                 </div>
 
@@ -176,6 +316,7 @@ let ErrorHandler = (event) => {
                                         type="text"
                                         name="name"
                                         autoComplete="off"
+                                        defaultValue={subCategoryDetails.name}
                                         onKeyUp={ErrorHandler}
                                         className="text-[17px] border border-slate-300 text-gray-900 rounded-lg 
                                         focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500
@@ -199,12 +340,18 @@ let ErrorHandler = (event) => {
                                         type="number"
                                         name="order"
                                         min={1}
+                                        onKeyUp={ErrorHandler}
+                                        defaultValue={subCategoryDetails.order}
                                         autoComplete="off"
                                         className="text-[17px] border border-slate-300 text-gray-900 rounded-lg 
                                         focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500
                                         block w-full py-2.5 px-3"
                                         placeholder="Enter order number"
                                     />
+
+                                    {errors.includes("order") && (
+                                        <p className="text-red-600 text-sm mt-1">Order is required</p>
+                                    )}
                                 </div>
 
                                 <div className='flex justify-end'>
@@ -215,7 +362,13 @@ let ErrorHandler = (event) => {
                                         focus:ring-4 focus:ring-indigo-300
                                         font-medium rounded-lg text-md px-6 py-2.5 shadow-sm transition-all"
                                     >
-                                        Submit
+                                        {
+                                            subCategoryId
+                                            ?
+                                            'Update'
+                                            :
+                                            'Submit'
+                                        }
                                     </button>
                                 </div>
 
