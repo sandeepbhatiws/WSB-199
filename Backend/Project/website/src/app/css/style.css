@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+.categorysectionsidebar{
+    overflow-y: scroll;
+    height: 450px;
+}
+
+.categorysectionsidebar::-webkit-scrollbar-thumb {
+    background-color: #8B5E3C;
+    border-radius: 10px;
+}
+.categorysectionsidebar::-webkit-scrollbar-track {
+    background-color: #C09578;
+}

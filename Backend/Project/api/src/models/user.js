@@ -46,7 +46,7 @@ const schema = new mongoose.Schema({
     },
     order : {
         type : Number,
-        required : [true, 'Order is required'],
+        // required : [true, 'Order is required'],
         min : [0, 'Minimum value must be atleast 0'],
         max : [1000, 'Maximum value must be atleast 1000']
     },
@@ -66,8 +66,16 @@ const schema = new mongoose.Schema({
         type : Date,
         default : null
     },
+    password_reset_token : {
+        type : String,
+        default : null
+    },
+    password_reset_expires : {
+        type : Date,
+        default : null
+    },
 });
 
-const categoryModal = mongoose.model('categories', schema);
+const userModal = mongoose.model('users', schema);
 
-module.exports = categoryModal;
+module.exports = userModal;

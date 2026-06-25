@@ -20,6 +20,7 @@ server.use('/uploads', express.static('uploads'));
 
 // Website Routes
 require('./src/routes/website/user.routes')(server)
+require('./src/routes/website/order.routes')(server)
 
 // Admin Routes
 require('./src/routes/admin/material.routes')(server)
